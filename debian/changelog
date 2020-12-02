@@ -1,0 +1,592 @@
+ruby2.3 (2.3.3-1+deb9u9) stretch-security; urgency=high
+
+  * Non-maintainer upload by the LTS team.
+  * Add patch to fix a potential HTTP request smuggling
+    vulnerability in WEBrick. (Fixes: CVE-2020-25613)
+
+ -- Utkarsh Gupta <utkarsh@debian.org>  Thu, 01 Oct 2020 18:54:55 +0530
+
+ruby2.3 (2.3.3-1+deb9u8) stretch; urgency=high
+
+  * Non-maintainer upload.
+  * Add patch to fix unsafe object creation vulnerability.
+    (Fixes: CVE-2020-10663)
+
+ -- Utkarsh Gupta <utkarsh@debian.org>  Fri, 05 Jun 2020 14:25:50 +0530
+
+ruby2.3 (2.3.3-1+deb9u7) stretch-security; urgency=high
+
+  * Non-maintainer upload by the Security Team.
+  * Fix for wrong fnmatch patttern (CVE-2019-15845)
+  * Loop with String#scan without creating substring (CVE-2019-16201)
+  * WEBrick: prevent response splitting and header injection (CVE-2019-16254)
+  * lib/shell/command-processor.rb (Shell#[]): prevent unknown command
+    (CVE-2019-16255)
+
+ -- Salvatore Bonaccorso <carnil@debian.org>  Sun, 15 Dec 2019 17:28:25 +0100
+
+ruby2.3 (2.3.3-1+deb9u6) stretch-security; urgency=medium
+
+  * CVE-2019-8320, CVE-2019-8321, CVE-2019-8322, CVE-2019-8323, CVE-2019-8324
+  * CVE-2019-8325
+
+ -- Moritz Mühlenhoff <jmm@debian.org>  Fri, 12 Apr 2019 20:28:46 +0200
+
+ruby2.3 (2.3.3-1+deb9u5) stretch; urgency=medium
+
+  * Backport upstream patches to fix FTBFS due to expired SSL certificate and
+    timezone changes (Closes: #919999)
+    - imap: update test certificate
+    - timezone changes for Japan and Kiritimati
+  * test/ruby/test_gc.rb: skip entirely; some tests in there can fail
+    unpredictably on buildds (Closes: #912740)
+
+ -- Antonio Terceiro <terceiro@debian.org>  Sat, 23 Feb 2019 18:31:45 -0300
+
+ruby2.3 (2.3.3-1+deb9u4) stretch-security; urgency=high
+
+  * Non-maintainer upload by the Security Team.
+  * OpenSSL::X509::Name equality check does not work correctly
+    (CVE-2018-16395)
+  * pack.c: avoid returning uninitialized String
+  * Tainted flags are not propagated in Array#pack and String#unpack with some
+    directives (CVE-2018-16396)
+
+ -- Salvatore Bonaccorso <carnil@debian.org>  Sun, 28 Oct 2018 21:49:57 +0100
+
+ruby2.3 (2.3.3-1+deb9u3) stretch-security; urgency=medium
+
+  [ Santiago R.R. ]
+  * Fix Command injection vulnerability in Net::FTP.
+    [CVE-2017-17405]
+  * webrick: use IO.copy_stream for multipart response. Required changes in
+    WEBrick to fix CVE-2017-17742 and CVE-2018-8777
+  * Fix HTTP response splitting in WEBrick.
+    [CVE-2017-17742]
+  * Fix Command Injection in Hosts::new() by use of Kernel#open.
+    [CVE-2017-17790]
+  * Fix Unintentional directory traversal by poisoned NUL byte in Dir
+    [CVE-2018-8780]
+  * Fix multiple vulnerabilities in RubyGems.
+    CVE-2018-1000073: Prevent Path Traversal issue during gem installation.
+    CVE-2018-1000074: Fix possible Unsafe Object Deserialization
+    Vulnerability in gem owner.
+    CVE-2018-1000075: Strictly interpret octal fields in tar headers.
+    CVE-2018-1000076: Raise a security error when there are duplicate files
+    in a package.
+    CVE-2018-1000077: Enforce URL validation on spec homepage attribute.
+    CVE-2018-1000078: Mitigate XSS vulnerability in homepage attribute when
+    displayed via gem server.
+    CVE-2018-1000079: Prevent path traversal when writing to a symlinked
+    basedir outside of the root.
+  * Fix directory traversal vulnerability in the Dir.mktmpdir method in the
+    tmpdir library
+    [CVE-2018-6914]
+  * Fix Unintentional socket creation by poisoned NUL byte in UNIXServer and
+    UNIXSocket
+    [CVE-2018-8779]
+  * Fix Buffer under-read in String#unpack
+    [CVE-2018-8778]
+  * Fix tests to cope with updates in tzdata (Closes: #889117)
+  * Exclude Rinda TestRingFinger and TestRingServer test units requiring
+    network access (Closes: #898694)
+
+  [ Antonio Terceiro ]
+  * debian/tests/excludes/any/TestTimeTZ.rb: ignore tests failing due to
+    assumptions that don't hold on newer tzdata update. Upstream bug:
+    https://bugs.ruby-lang.org/issues/14655
+
+ -- Santiago R.R. <santiagorr@riseup.net>  Thu, 19 Jul 2018 13:28:10 +0200
+
+ruby2.3 (2.3.3-1+deb9u2) stretch-security; urgency=high
+
+  * asn1: fix out-of-bounds read in decoding constructed objects
+    [CVE-2017-14033] (Closes: #875928)
+    Original patch by Kazuki Yamaguchi; backported from the standalone openssl package
+  * lib/webrick/log.rb: sanitize any type of logs
+    [CVE-2017-10784] (Closes: #875931)
+    Original patch by Yusuke Endoh; backported to Ruby 2.3 by Usaku NAKAMURA
+  * fix Buffer underrun vulnerability in Kernel.sprintf
+    [CVE-2017-0898] (Closes: #875936)
+    Backported to Ruby 2.3 by Usaku NAKAMURA
+  * Whitelist classes and symbols that are in Gem spec YAML
+    [CVE-2017-0903] (Closes: #879231)
+    Original patch by Aaron Patterson; backported from the standalone Rubygems
+    package
+  * thread_pthread.c: do not wakeup inside child processes
+    Avoid child Ruby processed being stuck in a busy loop (Closes: #876377)
+    Original patch by Eric Wong
+
+ -- Antonio Terceiro <terceiro@debian.org>  Sun, 22 Oct 2017 12:45:48 -0200
+
+ruby2.3 (2.3.3-1+deb9u1) stretch-security; urgency=high
+
+  * Fix arbitrary heap exposure problem in the JSON library (Closes: #873906)
+    [CVE-2017-14064]
+    - Backported for Ruby 2.3 by Hiroshi SHIBATA <hsbt@ruby-lang.org>
+      https://bugs.ruby-lang.org/issues/13853
+  * Fix multiple security vulnerabilities in Rubygems (Closes: #873802)
+    - Fix a DNS request hijacking vulnerability. Discovered by Jonathan
+      Claudius, fix by Samuel Giddins.
+      [CVE-2017-0902]
+    - Fix an ANSI escape sequence vulnerability. Discovered by Yusuke Endoh,
+      fix by Evan Phoenix.
+      [CVE-2017-0899]
+    - Fix a DOS vulernerability in the query command. Discovered by Yusuke
+      Endoh, fix by Samuel Giddins.
+      [CVE-2017-0900]
+    - Fix a vulnerability in the gem installer that allowed a malicious gem to
+      overwrite arbitrary files. Discovered by Yusuke Endoh, fix by Samuel
+      Giddins.
+      [CVE-2017-0901]
+  * Fix SMTP comment injection (Closes: #864860)
+    Patch by Shugo Maeda <shugo@ruby-lang.org>
+    [CVE-2015-9096]
+  * Fix IV Reuse in GCM Mode (Closes: #842432)
+    Patch by Kazuki Yamaguchi <k@rhe.jp>
+    [CVE-2016-7798]
+
+ -- Antonio Terceiro <terceiro@debian.org>  Sat, 02 Sep 2017 15:11:07 -0300
+
+ruby2.3 (2.3.3-1) unstable; urgency=medium
+
+  * New upstream version.
+
+ -- Christian Hofstaedtler <zeha@debian.org>  Tue, 22 Nov 2016 12:32:41 +0000
+
+ruby2.3 (2.3.2-1) unstable; urgency=medium
+
+  * New upstream version.
+
+ -- Christian Hofstaedtler <zeha@debian.org>  Wed, 16 Nov 2016 01:31:08 +0000
+
+ruby2.3 (2.3.1-6) unstable; urgency=medium
+
+  * debian/rules: honor 'nocheck' flag in DEB_BUILD_OPTIONS (Closes: #842768).
+    Thanks to John Paul Adrian Glaubitz for the patch.
+  * Build-Depends on libssl1.0-dev. Ruby 2.3 is not likely to get OpenSSL 1.1
+    compatibility (see #828535)
+
+ -- Antonio Terceiro <terceiro@debian.org>  Wed, 09 Nov 2016 14:38:59 -0200
+
+ruby2.3 (2.3.1-5) unstable; urgency=medium
+
+  * Increase timeout for test_array.rb test_permutation_stack_error,
+    as Array#permutation is very slow on armel, mips, mipsel.
+    Forwarded to upstream as issue #12502.
+  * Disable test_process.rb test_aspawn_too_long_path, as it uses ~2GB
+    of RAM and a lot of CPU time before finally failing on mips, mipsel.
+    Forwarded to upstream as issue #12500.
+  * Increase timeout for test_gc.rb test_gc_parameter, for mips, mipsel.
+
+ -- Christian Hofstaedtler <zeha@debian.org>  Fri, 17 Jun 2016 23:30:49 +0000
+
+ruby2.3 (2.3.1-4) unstable; urgency=medium
+
+  * Backport some test changes from Ruby trunk, to fix (some) build
+    failures on archs other than amd64, i386, ppc64el, s390x.
+
+ -- Christian Hofstaedtler <zeha@debian.org>  Wed, 15 Jun 2016 07:32:02 +0000
+
+ruby2.3 (2.3.1-3) unstable; urgency=medium
+
+  * Replace libruby2.3-dbg with automatic dbgsym packages.
+  * Avoid unreproducible rbconfig.rb (always use bash to build).
+  * rdoc: sort input filenames in a consistent way (for reproducible).
+  * Run full testsuite during build (make check instead of make test).
+
+ -- Christian Hofstaedtler <zeha@debian.org>  Tue, 14 Jun 2016 20:47:45 +0000
+
+ruby2.3 (2.3.1-2) unstable; urgency=medium
+
+  [ Antonio Terceiro ]
+  * debian/tests/known-failures.txt: remove test that now passes
+    (test/rinda/test_rinda.rb)
+  * debian/rules: enable bindnow hardening option (Closes: #822288)
+  * debian/copyright: update and simplify copyright annotations for Unicode
+    files under enc/trans/JIS/
+  * Bump Standards-Version to 3.9.8 (no changes needed)
+
+  [ Christian Hofstaedtler ]
+  * Stop providing ruby-interpreter. Only packages providing
+    /usr/bin/ruby can be a credible provider of ruby-interpreter.
+    (Closes: #822072)
+  * Raise priority to "optional", now that ruby2.2 is gone, although
+    the value of this change is unclear. (Closes: #822911)
+  * Apply patch from Reiner Herrmann <reiner@reiner-h.de> to help with
+    reproducibility of mkmf.rb using packages. (Closes: #825569)
+
+ -- Christian Hofstaedtler <zeha@debian.org>  Mon, 30 May 2016 12:14:46 +0000
+
+ruby2.3 (2.3.1-1) unstable; urgency=medium
+
+  * Call make install-doc, install-nodoc with V=1, for diagnosing
+    build failures.
+  * New upstream TEENY version.
+
+ -- Christian Hofstaedtler <zeha@debian.org>  Wed, 27 Apr 2016 07:40:42 +0000
+
+ruby2.3 (2.3.0-5) unstable; urgency=medium
+
+  * Set gzip embedded mtime field to fixed value for rdoc-generated
+    compressed javascript data. Helps with reproducibility of rdoc-using
+    packages.
+  * Build tcltk extension for Tcl/Tk 8.6.
+  * Apply patch from upstream to fix crash in Proc binding.
+    (ruby-core: 74100, trunk r54128, bug #12137). (Closes: #816161)
+
+ -- Christian Hofstaedtler <zeha@debian.org>  Wed, 16 Mar 2016 23:36:12 +0000
+
+ruby2.3 (2.3.0-4) unstable; urgency=medium
+
+  * Apply patch from upstream to fix deserializing OpenStruct via Psych,
+    (ruby-core: 72501, trunk r53366). (Closes: #816358)
+
+ -- Christian Hofstaedtler <zeha@debian.org>  Tue, 01 Mar 2016 22:41:19 +0100
+
+ruby2.3 (2.3.0-3) unstable; urgency=medium
+
+  * Explicitly set bundled gem dates. Otherwise these multi-arch same files
+    differ on different architectures depending on build date.
+    (Closes: #810321)
+  * Apply patch from upstream (ruby-core:72736, trunk r53455) to fix extension
+    builds that use g++.
+  * Bump Standards-Version to 3.9.7 with no addtl. changes
+  * d/copyright: Remove rake, no longer bundled.
+  * Switch Vcs-* URLs to https.
+
+ -- Christian Hofstaedtler <zeha@debian.org>  Mon, 29 Feb 2016 21:45:51 +0100
+
+ruby2.3 (2.3.0-2) unstable; urgency=medium
+
+  * debian/libruby2.3.symbols: update with new symbols introduced right before
+    the final 2.3.0 release.
+  * libruby2.3: add dependencies on rake, ruby-did-you-mean and
+    ruby-net-telnet
+
+ -- Antonio Terceiro <terceiro@debian.org>  Sat, 30 Jan 2016 09:20:31 -0200
+
+ruby2.3 (2.3.0-1) unstable; urgency=medium
+
+  [ Antonio Terceiro ]
+  * Ruby 2.3
+  * debian/tests/bundled-gems: check if all libraries that are supposed to be
+    bundled are present, with a version greater than or equal to the one
+    specified in gems/bundled_gems
+  * debian/tests/run-all: filter failures against list of known failures. Pass
+    if only the tests listed in debian/tests/known-failures.txt fail, fail
+    otherwise. This will help catch regressions.
+  * debian/copyright: update wrt new files in the distribution
+
+  [ Christian Hofstaedtler ]
+  * autopkgtest: depend on all packages so we actually have header files
+    installed.
+
+ -- Antonio Terceiro <terceiro@debian.org>  Mon, 28 Dec 2015 09:17:47 -0300
+
+ruby2.2 (2.2.3-2) unstable; urgency=medium
+
+  * Add dependency on ruby-minitest to provide the same experience out of the
+    box as the upstream package (Closes: #803665)
+  * Apply upstream patch to not use SSLv3 methods if OpenSSL does not export
+    them (Closes: #804089)
+  * updated debian/libruby2.2.symbols with 1 new symbol.
+
+ -- Antonio Terceiro <terceiro@debian.org>  Thu, 05 Nov 2015 18:43:02 -0200
+
+ruby2.2 (2.2.3-1) unstable; urgency=medium
+
+  * New upstream release
+
+ -- Christian Hofstaedtler <zeha@debian.org>  Tue, 18 Aug 2015 22:22:21 +0000
+
+ruby2.2 (2.2.2-3) unstable; urgency=medium
+
+  [ Christian Hofstaedtler ]
+  * Have libruby2.2 depend on ruby-test-unit, as upstream bundles this
+    externally maintained package in their tarballs. (Closes: #791925)
+
+  [ Antonio Terceiro ]
+  * Apply upstream patches to fix Request hijacking vulnerability in Rubygems
+    [CVE-2015-3900] (Closes: #790111)
+
+ -- Antonio Terceiro <terceiro@debian.org>  Wed, 29 Jul 2015 09:50:08 -0300
+
+ruby2.2 (2.2.2-2) unstable; urgency=medium
+
+  * Make Date in gemspec reproducible. Initial patch from Chris Lamb
+    <lamby@debian.org>. (Closes: #779631, #784225)
+  * Replace embedded copies of Lato with symlinks to fonts-lato.
+    (Closes: #762348)
+  * debian/copyright: improve DEP-5 compliance.
+  * Provide debug symbols, in a new libruby2.2-dbg package. Patch from
+    Matt Palmer <mpalmer@debian.org>. (Closes: #785685)
+  * Build libruby.so with dpkg-buildflags supplied LDFLAGS.
+    (Closes: #762350)
+
+ -- Christian Hofstaedtler <zeha@debian.org>  Wed, 01 Jul 2015 15:36:24 +0200
+
+ruby2.2 (2.2.2-1) unstable; urgency=medium
+
+  * New upstream release
+    - includes fix for vulnerability with overly permissive matching of
+      hostnames in OpenSSL extension [CVE-2015-1855]
+  * debian/rules: add import-orig-source to automate importing orig tarballs
+    generated from the upstream git mirror.
+  * debian/tests: add a functional test that will run all tests under test/
+
+ -- Antonio Terceiro <terceiro@debian.org>  Sun, 03 May 2015 18:56:32 -0300
+
+ruby2.2 (2.2.1-1) unstable; urgency=medium
+
+  * New upstream release
+  * debian/copyright: review
+    - enc/* relicensed to the same license as Ruby
+    - add license for ccan/* (CC0)
+    - add license for enc/trans/JIS/*
+      - some under the "Unicode" license
+      - most under permissive "You can use, modify, distribute this table
+        freely." terms
+    - ext/nkf/ relicensed to zlib/libpng license
+  * debian/upstream-changes: simpler and more accurate implementation
+  * debian/libruby2.2.symbols: updated
+
+ -- Antonio Terceiro <terceiro@debian.org>  Fri, 03 Apr 2015 21:30:14 -0300
+
+ruby2.2 (2.2.0~1-1) UNRELEASED; urgency=medium
+
+  * Ruby 2.2 RC1
+  * Dropped all Debian-specific changes to the upstream sources; everything we
+    need is fixed upstream
+
+ -- Antonio Terceiro <terceiro@debian.org>  Fri, 19 Dec 2014 14:46:35 -0200
+
+ruby2.1 (2.1.5-1) unstable; urgency=medium
+
+  * New upstream release
+    - Fixes CVE-2014-8090 Another Denial of Service XML Expansion
+      (Closes: #770932)
+    - Fixes build on SPARC (Closes: #769731)
+
+ -- Antonio Terceiro <terceiro@debian.org>  Sat, 29 Nov 2014 12:30:39 -0200
+
+ruby2.1 (2.1.4-1) unstable; urgency=high
+
+  * New upstream version
+    - CVE-2014-8080: Denial of Service in XML Expansion
+    - Changes default settings in OpenSSL bindings to not use deprecated and
+      insecure ciphers; avoids issues associated to CVE-2014-3566 (i.e. the
+      "POODLE" bug in OpenSSL)
+
+ -- Antonio Terceiro <terceiro@debian.org>  Wed, 29 Oct 2014 12:07:22 -0200
+
+ruby2.1 (2.1.3-2) unstable; urgency=medium
+
+  [ Sebastian Boehm ]
+  * Install SystemTap tap file (Closes: #765862)
+
+ -- Christian Hofstaedtler <zeha@debian.org>  Sun, 19 Oct 2014 20:07:50 +0200
+
+ruby2.1 (2.1.3-1) unstable; urgency=medium
+
+  * New upstream version
+
+ -- Christian Hofstaedtler <zeha@debian.org>  Sat, 20 Sep 2014 16:55:47 +0200
+
+ruby2.1 (2.1.2-4) unstable; urgency=medium
+
+  [ Antonio Terceiro ]
+  * Move libjs-jquery dependency from libruby2.1 to ruby2.1, and turn it into
+    Recommends:. This way programs that link against libruby2.1 won't pull in
+    libjs-jquery; OTOH those using rdoc (and thus needing libjs-jquery) would
+    be already using ruby2.1 anyway.
+
+  [ Christian Hofstaedtler ]
+  * Update Vcs-Git URL, as we've moved from master2.1 to master.
+  * Prepare libruby21.symbols for x32 (Closes: #759615)
+  * Remove embedded copies of SSL certificates. Rubygems is advised by
+    rubygems-integration to use the ca-certificates provided certificates.
+    (Closes: #689074)
+
+ -- Christian Hofstaedtler <zeha@debian.org>  Fri, 05 Sep 2014 03:06:30 +0200
+
+ruby2.1 (2.1.2-3) unstable; urgency=medium
+
+  [ Antonio Terceiro ]
+  * debian/rules: call debian/split-tk-out.rb with $(baseruby) instead of
+    `ruby` to actually support bootstrapping with ruby1.8 (and no `ruby`)
+  * Break dependency loop (Closes: #747858)
+    - ruby2.1: drop dependency on ruby
+    - libruby2.1: drop dependency on ruby2.1
+
+  [ Christian Hofstaedtler ]
+  * Add missing man pages for gem, rdoc, testrb (Closes: #756053, #756815)
+  * Correct ruby2.1's Multi-Arch flag to 'allowed' (Closes: #745360)
+
+ -- Antonio Terceiro <terceiro@debian.org>  Thu, 14 Aug 2014 10:45:29 -0300
+
+ruby2.1 (2.1.2-2) unstable; urgency=medium
+
+  * Support bootstrapping with Ruby 1.8 (which builds with gcc only) if another
+    Ruby is not available.
+
+ -- Antonio Terceiro <terceiro@debian.org>  Thu, 15 May 2014 23:20:49 -0300
+
+ruby2.1 (2.1.2-1) unstable; urgency=medium
+
+  [ Christian Hofstaedtler ]
+  * New upstream version
+  * Update watch file
+
+  [ Sebastian Boehm ]
+  * Build with basic systemtap support. (Closes: #747232)
+
+  [ Antonio Terceiro ]
+  * 2.1 is now the main development branch
+
+ -- Christian Hofstaedtler <zeha@debian.org>  Sat, 10 May 2014 15:51:13 +0200
+
+ruby2.1 (2.1.1-4) unstable; urgency=medium
+
+  * Use Debian copy of config.{guess,sub}
+    Instead of downloading it from the Internet, which could be down or
+    insecure. Thanks to Scott Kitterman for the report AND patch.
+    (Closes: 745699)
+  * Move jquery source file to d/missing-sources
+
+ -- Christian Hofstaedtler <zeha@debian.org>  Fri, 25 Apr 2014 00:57:13 +0200
+
+ruby2.1 (2.1.1-3) unstable; urgency=medium
+
+  [ Antonio Terceiro ]
+  * Disable rubygems-integration during the build. This fixes the install
+    location of the gemspecs for the bundled libraries. (Closes: #745465)
+
+ -- Christian Hofstaedtler <zeha@debian.org>  Tue, 22 Apr 2014 18:38:01 +0200
+
+ruby2.1 (2.1.1-2) unstable; urgency=medium
+
+  * Tie Tcl/Tk dependency to version 8.5, applying patch from Ubuntu.
+    Thanks to Matthias Klose <doko@debian.org>
+
+ -- Christian Hofstaedtler <zeha@debian.org>  Mon, 10 Mar 2014 13:38:41 +0100
+
+ruby2.1 (2.1.1-1) unstable; urgency=medium
+
+  * Imported Upstream version 2.1.1
+  * Update lintian overrides
+
+ -- Christian Hofstaedtler <zeha@debian.org>  Wed, 05 Mar 2014 18:22:58 +0100
+
+ruby2.1 (2.1.0-2) unstable; urgency=medium
+
+  * ruby2.1-dev: Depend on libgmp-dev.
+    Thanks to John Leach <john@johnleach.co.uk>
+  * Fix FTBFS with libreadline 6.x, by applying upstream r45225.
+
+ -- Christian Hofstaedtler <zeha@debian.org>  Mon, 03 Mar 2014 21:10:32 +0100
+
+ruby2.1 (2.1.0-1) unstable; urgency=medium
+
+  * Upload to unstable.
+
+ -- Christian Hofstaedtler <zeha@debian.org>  Sat, 22 Feb 2014 23:44:44 +0100
+
+ruby2.1 (2.1.0-1~exp2) experimental; urgency=medium
+
+  [ Antonio Terceiro ]
+  * ruby2.1-dev: add missing dependency on libruby2.1
+
+  [ Christian Hofstaedtler ]
+  * Again depend on ruby without alternatives management
+  * Tag 64bit-only symbols as such
+
+ -- Christian Hofstaedtler <zeha@debian.org>  Thu, 13 Feb 2014 13:02:25 +0100
+
+ruby2.1 (2.1.0-1~exp1) experimental; urgency=medium
+
+  * New release train, branch off and rename everything to ruby2.1
+    (Closes: #736664)
+  * Build with GMP library for faster Bignum operations.
+  * Target experimental as long as ruby 1:1.9.3.1 has not entered
+    unstable, dropping the versioned dependency for now.
+
+ -- Christian Hofstaedtler <zeha@debian.org>  Thu, 23 Jan 2014 19:25:19 +0100
+
+ruby2.0 (2.0.0.484-1) UNRELEASED; urgency=medium
+
+  [ Antonio Terceiro ]
+  * New upstream snapshot.
+  * Add patch by Yamashita Yuu to fix build against newer OpenSSL
+    (Closes: #733372)
+
+  [ Christian Hofstaedtler ]
+  * Use any valid Ruby interpreter to bootstrap
+  * Bump Standards-Version to 3.9.5 (no changes)
+  * Add myself to Uploaders:
+  * Add Dependencies to facilitate upgrades from 1.8
+    * libruby2.0 now depends on ruby2.0
+    * ruby2.0 now depends on ruby
+  * Stop installing alternatives/symlinks for binaries:
+    * /usr/bin/{ruby,erb,testrb,irb,rdoc,ri}
+
+ -- Christian Hofstaedtler <zeha@debian.org>  Fri, 17 Jan 2014 16:35:57 +0100
+
+ruby2.0 (2.0.0.353-1) unstable; urgency=low
+
+  * New upstream release
+    + Includes fix for Heap Overflow in Floating Point Parsing (CVE-2013-4164)
+      Closes: #730190
+
+ -- Antonio Terceiro <terceiro@debian.org>  Mon, 25 Nov 2013 22:34:25 -0300
+
+ruby2.0 (2.0.0.343-1) unstable; urgency=low
+
+  * New upstream version (snapshot from 2.0 maintainance branch).
+  * fix typo in ruby2.0-tcltk description
+  * Backported upstream patches from Tanaka Akira to fix FTBFS on:
+    - GNU/kFreeBSD (Closes: #726095)
+    - x32 (Closes: #727010)
+  * Make date for io-console gemspec predictable (Closes: #724974)
+  * libruby2.0 now depends on libjs-jquery because of rdoc (Closes: #725056)
+  * Backport upstream patch by Nobuyoshi Nakada to fix include directory in
+    `pkg-config --cflags` (Closes: #725166)
+  * Document missing licenses in debian/copyright (Closes: #723161)
+  * debian/libruby2.0.symbols: add new symbol rb_exec_recursive_paired_outer
+    (not in the public API though)
+
+ -- Antonio Terceiro <terceiro@debian.org>  Tue, 05 Nov 2013 20:33:23 -0300
+
+ruby2.0 (2.0.0.299-2) unstable; urgency=low
+
+  * Split Ruby/Tk out of libruby2.0 into its own package, ruby2.0-tcltk. This
+    will reduce the footprint of a basic Ruby installation.
+
+ -- Antonio Terceiro <terceiro@debian.org>  Sun, 15 Sep 2013 22:09:57 -0300
+
+ruby2.0 (2.0.0.299-1) unstable; urgency=low
+
+  * New upstream release
+    + Includes a fix for override of existing LDFLAGS when building compiled
+      extensions that use pkg-config (Closes: #721799).
+  * debian/rules: forward-port to tcl/tk packages with multi-arch support.
+    Thanks to Tristan Hill for reporting on build for Ubuntu saucy
+  * debian/control: ruby2.0 now provides ruby-interpreter
+  * Now using tarballs generated from the git mirror.
+    + The released tarballs will modify shipped files on clean. Without this
+      we can stop messing around with files that need to be recovered after a
+      `debian/rules clean` to make them match the orig tarball and avoid
+      spurious diffs.
+    + This also lets us drop the diffs against generated files such as
+      tool/config.* and configure.
+    + documented in debian/README.source
+  * debian/libruby2.0.symbols: refreshed with 2 new symbols added since last
+    version.
+
+ -- Antonio Terceiro <terceiro@debian.org>  Sun, 08 Sep 2013 12:38:34 -0300
+
+ruby2.0 (2.0.0.247-1) unstable; urgency=low
+
+  * Initial release (Closes: #697703)
+
+ -- Antonio Terceiro <terceiro@debian.org>  Mon, 07 Jan 2013 14:48:51 -0300
